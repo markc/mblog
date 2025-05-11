@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Custom styles for prose content in blog posts */
+.prose {
+    @apply max-w-none text-gray-800 dark:text-gray-200;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    @apply font-bold text-gray-900 dark:text-white mb-4 mt-6;
+}
+
+.prose h1 {
+    @apply text-3xl;
+}
+
+.prose h2 {
+    @apply text-2xl;
+}
+
+.prose h3 {
+    @apply text-xl;
+}
+
+.prose p {
+    @apply mb-4;
+}
+
+.prose ul,
+.prose ol {
+    @apply mb-4 pl-8;
+}
+
+.prose ul {
+    @apply list-disc;
+}
+
+.prose ol {
+    @apply list-decimal;
+}
+
+.prose a {
+    @apply text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400 font-medium;
+}
+
+.prose blockquote {
+    @apply border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic text-gray-600 dark:text-gray-400;
+}
+
+.prose code {
+    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-gray-800 dark:text-gray-200 font-mono text-sm;
+}
+
+.prose pre {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-x-auto mb-4;
+}
+
+.prose pre code {
+    @apply bg-transparent p-0 text-gray-800 dark:text-gray-200;
+}
+
+.prose img {
+    @apply rounded-lg shadow-md my-6;
+}
+
+.prose table {
+    @apply w-full border-collapse mb-6;
+}
+
+.prose table th,
+.prose table td {
+    @apply border border-gray-300 dark:border-gray-700 p-2;
+}
+
+.prose table th {
+    @apply bg-gray-100 dark:bg-gray-800 font-semibold;
+}
+
+.prose hr {
+    @apply border-gray-300 dark:border-gray-700 my-8;
+}
