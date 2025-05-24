@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
+use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -30,6 +32,18 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(true)->colors([
                 'primary' => Color::Amber,
             ])
+            ->plugin(
+                FilamentSocialitePlugin::make()
+                    ->providers([
+                        Provider::make('github')
+                            ->label('GitHub')
+                            ->icon('heroicon-o-globe-alt')
+                            ->color(Color::hex('#333'))
+                            ->outlined(false)
+                            ->scopes(['read:user', 'user:email']),
+                    ])
+                    ->registration(true)
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
