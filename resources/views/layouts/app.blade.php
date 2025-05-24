@@ -32,7 +32,7 @@
 </head>
 <body class="fi-body fi-panel-app min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white">
     <!-- Top Navigation Bar -->
-    <nav class="fi-topbar sticky top-0 z-50 border-b border-gray-200 bg-white px-4 md:px-6 lg:px-8 dark:border-white/10 dark:bg-gray-900">
+    <nav class="fi-topbar sticky top-0 z-50 border-b border-gray-200 bg-white px-4 md:px-6 lg:px-8 dark:border-white/10 dark:bg-gray-900" x-data="{ mobileMenuOpen: false }">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between overflow-visible">
             <!-- Logo / Site Name -->
             <div class="flex items-center">
@@ -92,7 +92,7 @@
 
             <!-- Mobile menu button -->
             <div class="md:hidden">
-                <button type="button" x-data x-on:click="$refs.mobileMenu.classList.toggle('hidden')" 
+                <button type="button" x-on:click="mobileMenuOpen = !mobileMenuOpen" 
                         class="fi-icon-btn fi-color-gray fi-icon-btn-size-md flex items-center justify-center">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -102,23 +102,21 @@
 
             <!-- Social Links -->
             <div class="hidden items-center space-x-4 md:flex">
-                @if(\App\Models\Setting::get('social_github'))
-                <a href="{{ \App\Models\Setting::get('social_github') }}" target="_blank" 
+                <a href="https://github.com/markc/mblog" target="_blank" 
                    class="fi-icon-btn fi-color-gray fi-icon-btn-size-md">
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <svg class="h-5 w-5 text-gray-600 dark:text-gray-300" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: currentColor;">
+                        <title>GitHub</title>
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
                     </svg>
                 </a>
-                @endif
                 
-                @if(\App\Models\Setting::get('social_twitter'))
-                <a href="{{ \App\Models\Setting::get('social_twitter') }}" target="_blank" 
+                <a href="https://goldcoast.org" target="_blank" 
                    class="fi-icon-btn fi-color-gray fi-icon-btn-size-md">
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2M7 4h10l-1 16H8L7 4z" />
+                    <svg class="h-5 w-5 text-gray-600 dark:text-gray-300" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: currentColor;">
+                        <title>Nextcloud</title>
+                        <path d="M12.018 6.537c-2.5 0-4.6 1.712-5.241 4.015-.56-1.232-1.793-2.105-3.225-2.105A3.569 3.569 0 0 0 0 12a3.569 3.569 0 0 0 3.552 3.553c1.432 0 2.664-.874 3.224-2.106.641 2.304 2.742 4.016 5.242 4.016 2.487 0 4.576-1.693 5.231-3.977.569 1.21 1.783 2.067 3.198 2.067A3.568 3.568 0 0 0 24 12a3.569 3.569 0 0 0-3.553-3.553c-1.416 0-2.63.858-3.199 2.067-.654-2.284-2.743-3.978-5.23-3.977zm0 2.085c1.878 0 3.378 1.5 3.378 3.378 0 1.878-1.5 3.378-3.378 3.378A3.362 3.362 0 0 1 8.641 12c0-1.878 1.5-3.378 3.377-3.378zm-8.466 1.91c.822 0 1.467.645 1.467 1.468s-.644 1.467-1.467 1.468A1.452 1.452 0 0 1 2.085 12c0-.823.644-1.467 1.467-1.467zm16.895 0c.823 0 1.468.645 1.468 1.468s-.645 1.468-1.468 1.468A1.452 1.452 0 0 1 18.98 12c0-.823.644-1.467 1.467-1.467z"/>
                     </svg>
                 </a>
-                @endif
                 
                 <!-- Admin Link -->
                 <a href="/admin" 
@@ -129,7 +127,7 @@
         </div>
 
         <!-- Mobile menu -->
-        <div x-ref="mobileMenu" class="hidden border-t border-gray-200 pb-3 pt-4 dark:border-white/10 md:hidden">
+        <div x-show="mobileMenuOpen" x-collapse class="border-t border-gray-200 pb-3 pt-4 dark:border-white/10 md:hidden">
             <div class="space-y-1">
                 <a href="{{ route('blog.index') }}" 
                    class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">
