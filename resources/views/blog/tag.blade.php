@@ -32,7 +32,7 @@
         <!-- Posts Grid -->
         <div class="grid gap-8 lg:grid-cols-2">
             @foreach($posts as $post)
-            <article class="fi-section-content-ctn rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+            <article class="fi-section-content-ctn rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10">
                 @if($post->featured_image)
                 <div class="overflow-hidden rounded-t-xl">
                     <img src="{{ Storage::url($post->featured_image) }}" 
@@ -61,7 +61,7 @@
                     <!-- Title -->
                     <h2 class="mb-3">
                         <a href="{{ route('post.show', $post) }}" 
-                           class="fi-link text-xl font-semibold text-gray-950 hover:text-primary-600 dark:text-white dark:hover:text-primary-400">
+                           class="fi-link text-xl font-semibold text-gray-950 hover:text-amber-600 dark:text-white dark:hover:text-amber-400">
                             {{ $post->title }}
                         </a>
                     </h2>
@@ -102,7 +102,7 @@
 
         <!-- Pagination -->
         @if($posts->hasPages())
-        <div class="fi-section-content-ctn rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+        <div class="fi-section-content-ctn rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10">
             <div class="flex justify-center">
                 {{ $posts->links() }}
             </div>
@@ -110,7 +110,7 @@
         @endif
     @else
         <!-- Empty State -->
-        <div class="fi-section-content-ctn rounded-xl bg-white p-12 text-center shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+        <div class="fi-section-content-ctn rounded-xl bg-white p-12 text-center shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10">
             <div class="fi-empty-state">
                 <div class="fi-empty-state-icon mb-4 flex justify-center">
                     <svg class="h-16 w-16 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

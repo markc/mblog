@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" 
+      x-data="{ 
+          darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      }" 
+      x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))"
+      :class="{ 'dark': darkMode }">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,8 +105,19 @@
                 </button>
             </div>
 
-            <!-- Social Links -->
+            <!-- Theme Switcher & Social Links -->
             <div class="hidden items-center space-x-4 md:flex">
+                <!-- Theme Switcher -->
+                <button @click="darkMode = !darkMode" class="fi-icon-btn fi-color-gray fi-icon-btn-size-md">
+                    <!-- Moon icon - show when in light mode (click to go dark) -->
+                    <svg x-show="!darkMode" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <!-- Sun icon - show when in dark mode (click to go light) -->
+                    <svg x-show="darkMode" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
                 <a href="https://github.com/markc/mblog" target="_blank" 
                    class="fi-icon-btn fi-color-gray fi-icon-btn-size-md">
                     <svg class="h-5 w-5 text-gray-600 dark:text-gray-300" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: currentColor;">
@@ -227,11 +243,5 @@
     @filamentScripts
     @vite('resources/js/app.js')
     
-    <!-- Ensure Alpine.js is available -->
-    <script>
-        document.addEventListener('alpine:init', () => {
-            console.log('Alpine.js is ready');
-        });
-    </script>
 </body>
 </html>

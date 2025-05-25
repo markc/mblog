@@ -8,7 +8,7 @@
 @section('content')
 <div class="space-y-8">
     <!-- Post Header -->
-    <article class="fi-section-content-ctn rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+    <article class="fi-section-content-ctn rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-gray-700">
         @if($post->featured_image)
         <div class="overflow-hidden rounded-t-xl">
             <img src="{{ Storage::url($post->featured_image) }}" 
@@ -32,7 +32,7 @@
                              alt="{{ $post->user->name }}"
                              class="h-full w-full rounded-full object-cover">
                         @else
-                        <div class="flex h-full w-full items-center justify-center rounded-full bg-primary-500 text-primary-50">
+                        <div class="flex h-full w-full items-center justify-center rounded-full bg-amber-500 text-amber-50">
                             {{ strtoupper(substr($post->user->name, 0, 1)) }}
                         </div>
                         @endif
@@ -63,7 +63,7 @@
             @endif
 
             <!-- Content -->
-            <div class="prose prose-gray max-w-none dark:prose-invert prose-headings:text-gray-950 prose-a:text-primary-600 prose-strong:text-gray-950 dark:prose-headings:text-white dark:prose-a:text-primary-400 dark:prose-strong:text-white">
+            <div class="prose prose-gray max-w-none dark:prose-invert prose-headings:text-gray-950 prose-a:text-amber-600 prose-strong:text-gray-950 dark:prose-headings:text-white dark:prose-a:text-amber-400 dark:prose-strong:text-white">
                 {!! $post->content !!}
             </div>
         </div>
@@ -71,7 +71,7 @@
 
     <!-- Related Posts -->
     @if($relatedPosts->isNotEmpty())
-    <div class="fi-section-content-ctn rounded-xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+    <div class="fi-section-content-ctn rounded-xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10">
         <h3 class="mb-6 text-xl font-semibold text-gray-950 dark:text-white">
             Related Posts
         </h3>
@@ -90,7 +90,7 @@
                 <div class="space-y-2">
                     <h4>
                         <a href="{{ route('post.show', $relatedPost) }}" 
-                           class="fi-link text-base font-medium text-gray-950 hover:text-primary-600 dark:text-white dark:hover:text-primary-400">
+                           class="fi-link text-base font-medium text-gray-950 hover:text-amber-600 dark:text-white dark:hover:text-amber-400">
                             {{ $relatedPost->title }}
                         </a>
                     </h4>
@@ -108,7 +108,7 @@
     @endif
 
     <!-- Navigation -->
-    <div class="fi-section-content-ctn rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10">
+    <div class="fi-section-content-ctn rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10">
         <div class="flex justify-between">
             <a href="{{ route('blog.index') }}" 
                class="fi-btn fi-color-gray fi-btn-size-md fi-size-md gap-1.5 px-4 py-2 font-semibold shadow-sm">
