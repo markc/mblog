@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Post;
-use App\Models\User;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Tests\Helpers\TestHelpers;
 
 test('post slug is automatically generated from title', function () {
@@ -57,7 +57,7 @@ test('published scope excludes posts with null published_at', function () {
 
 test('post can be scheduled for future publication', function () {
     $futureDate = now()->addWeek();
-    
+
     $post = Post::factory()->create([
         'is_published' => true,
         'published_at' => $futureDate,
@@ -76,7 +76,7 @@ test('post can be scheduled for future publication', function () {
 test('post excerpt is automatically truncated if too long', function () {
     $user = User::factory()->create();
     $category = Category::factory()->create();
-    
+
     $longExcerpt = str_repeat('This is a very long excerpt. ', 50); // ~1400 characters
 
     $post = Post::create([
@@ -96,7 +96,7 @@ test('post can have many-to-many relationship with tags', function () {
     $post = TestHelpers::createPostWithTags(5);
 
     expect($post->tags)->toHaveCount(5);
-    
+
     // Test relationship is bidirectional
     $firstTag = $post->tags->first();
     expect($firstTag->posts)->toContain($post);
@@ -135,6 +135,6 @@ test('post without meta_title falls back to regular title', function () {
     ]);
 
     $displayTitle = $post->meta_title ?: $post->title;
-    
+
     expect($displayTitle)->toBe('Regular Title');
 });

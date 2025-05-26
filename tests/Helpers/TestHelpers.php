@@ -32,7 +32,7 @@ class TestHelpers
     {
         $post = self::createPublishedPost($attributes);
         $tags = Tag::factory()->count($tagCount)->create();
-        
+
         $post->tags()->attach($tags);
 
         return $post;
