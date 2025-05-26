@@ -1,9 +1,13 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
+
 parameters:
     level: 1
     paths:
         - app
+        - database/factories
+        - database/seeders
     tmpDir: build/phpstan
-    checkMissingIterableValueType: false
     ignoreErrors:
-        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Builder#'
-        - '#Access to an undefined property App\\Models\\#'
+        - '#Access to an undefined property App\\Filament\\Pages\\Settings::\$form#'
