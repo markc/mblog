@@ -1,6 +1,7 @@
 # Laravel Filament Blog System
 
 [![Laravel Pint](https://github.com/markc/mblog/actions/workflows/pint.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/pint.yml)
+[![Pest Tests](https://github.com/markc/mblog/actions/workflows/pest.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/pest.yml)
 
 A simple blog platform built with Laravel 12 and Filament 3.3, featuring a fully integrated admin panel, GitHub OAuth authentication, and consistent theming throughout both admin and public pages.
 
@@ -218,15 +219,43 @@ When Filament v4 releases with native Tailwind v4 support:
 
 ## 🧪 Testing
 
+The project includes a comprehensive **Pest** test suite with **102 tests** and **217 assertions** covering all major functionality.
+
+### Test Coverage
+- **Unit Tests (67 tests)**: Models, Controllers, and Core Logic
+- **Feature Tests (35 tests)**: Full HTTP request/response testing
+- **Database Factories**: Complete test data generation
+- **Edge Cases**: 404 handling, validation, published status filtering
+
+### Running Tests
 ```bash
-# Run all tests
+# Run all tests (102 tests)
 php artisan test
 
 # Run with coverage
 php artisan test --coverage
 
-# Run specific test
-php artisan test --filter=ExampleTest
+# Run specific test suites
+php artisan test --testsuite=Unit
+php artisan test --testsuite=Feature
+
+# Run specific test file
+php artisan test tests/Feature/PostTest.php
+```
+
+### Test Structure
+```
+tests/
+├── Feature/           # HTTP integration tests
+│   ├── BlogHomepageTest.php
+│   ├── CategoryTest.php
+│   ├── PageTest.php
+│   ├── PostTest.php
+│   └── TagTest.php
+├── Unit/             # Unit tests for models & controllers
+│   ├── Controllers/
+│   └── Models/
+└── Pest.php         # Test configuration
 ```
 
 ## 🎯 Development Workflow
