@@ -99,7 +99,7 @@ test('post can have many-to-many relationship with tags', function () {
 
     // Test relationship is bidirectional
     $firstTag = $post->tags->first();
-    expect($firstTag->posts)->toContain($post);
+    expect($firstTag->posts->pluck('id'))->toContain($post->id);
 });
 
 test('post deletion removes tag relationships but not tags', function () {

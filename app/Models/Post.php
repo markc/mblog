@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -27,6 +28,53 @@ class Post extends Model
         'published_at' => 'datetime',
         'is_published' => 'boolean',
     ];
+
+    /**
+     * Boot the model and add event listeners for auto-generating slugs.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            if (empty($post->slug) && ! empty($post->title)) {
+                $post->slug = static::generateUniqueSlug($post->title);
+            }
+        });
+
+        static::updating(function ($post) {
+            if ($post->isDirty('title') && (empty($post->slug) || $post->slug === static::generateSlugFromTitle($post->getOriginal('title')))) {
+                $post->slug = static::generateUniqueSlug($post->title);
+            }
+        });
+    }
+
+    /**
+     * Generate a unique slug for the post.
+     */
+    protected static function generateUniqueSlug($title, $id = null)
+    {
+        $baseSlug = static::generateSlugFromTitle($title);
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (static::where('slug', $slug)->when($id, function ($query, $id) {
+            return $query->where('id', '!=', $id);
+        })->exists()) {
+            $slug = $baseSlug.'-'.$counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Generate a slug from a title.
+     */
+    protected static function generateSlugFromTitle($title)
+    {
+        return Str::slug($title);
+    }
 
     /**
      * Get the user that owns the post.
