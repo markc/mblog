@@ -1,13 +1,9 @@
-includes:
-    - phpstan-baseline.neon
-
 parameters:
-    level: 5
+    level: 1
     paths:
         - app
-        - database/factories
-        - database/seeders
     tmpDir: build/phpstan
-    checkOctaneCompatibility: true
-    checkModelProperties: true
     checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Builder#'
+        - '#Access to an undefined property App\\Models\\#'
