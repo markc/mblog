@@ -6,6 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * Post model with automatic slug generation and publishing features.
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $content
+ * @property string|null $excerpt
+ * @property string|null $featured_image
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property \Carbon\Carbon|null $published_at
+ * @property bool $is_published
+ * @property int $user_id
+ * @property int $category_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class Post extends Model
 {
     use HasFactory;
@@ -51,6 +69,10 @@ class Post extends Model
 
     /**
      * Generate a unique slug for the post.
+     *
+     * @param  string  $title  The post title to generate slug from
+     * @param  int|null  $id  Optional post ID to exclude from uniqueness check
+     * @return string The unique slug
      */
     protected static function generateUniqueSlug($title, $id = null)
     {
@@ -70,6 +92,9 @@ class Post extends Model
 
     /**
      * Generate a slug from a title.
+     *
+     * @param  string  $title  The title to convert to a slug
+     * @return string The generated slug
      */
     protected static function generateSlugFromTitle($title)
     {
