@@ -138,3 +138,66 @@ test('post without meta_title falls back to regular title', function () {
 
     expect($displayTitle)->toBe('Regular Title');
 });
+
+test('post slug updates when title changes and matches old slug pattern', function () {
+    $user = User::factory()->create();
+    $category = Category::factory()->create();
+
+    $post = Post::create([
+        'title' => 'Original Title',
+        'content' => 'Content',
+        'user_id' => $user->id,
+        'category_id' => $category->id,
+    ]);
+
+    expect($post->slug)->toBe('original-title');
+
+    // Update title - slug should update since it matches the old pattern
+    $post->update(['title' => 'Updated Title']);
+
+    expect($post->fresh()->slug)->toBe('updated-title');
+});
+
+test('post slug does not update when title changes but custom slug exists', function () {
+    $user = User::factory()->create();
+    $category = Category::factory()->create();
+
+    $post = Post::create([
+        'title' => 'Original Title',
+        'slug' => 'custom-slug',
+        'content' => 'Content',
+        'user_id' => $user->id,
+        'category_id' => $category->id,
+    ]);
+
+    expect($post->slug)->toBe('custom-slug');
+
+    // Update title - slug should NOT update since it's custom
+    $post->update(['title' => 'Updated Title']);
+
+    expect($post->fresh()->slug)->toBe('custom-slug');
+});
+
+test('unique slug generation handles collisions properly', function () {
+    $user = User::factory()->create();
+    $category = Category::factory()->create();
+
+    // Create first post with a title
+    $post1 = Post::create([
+        'title' => 'Duplicate Title',
+        'content' => 'Content 1',
+        'user_id' => $user->id,
+        'category_id' => $category->id,
+    ]);
+
+    // Create second post with same title - should get incremented slug
+    $post2 = Post::create([
+        'title' => 'Duplicate Title',
+        'content' => 'Content 2',
+        'user_id' => $user->id,
+        'category_id' => $category->id,
+    ]);
+
+    expect($post1->slug)->toBe('duplicate-title');
+    expect($post2->slug)->toBe('duplicate-title-1');
+});
