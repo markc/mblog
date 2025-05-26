@@ -1,2 +1,19 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: '#^Relation ''category'' is not found in App\\Models\\Post model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/BlogController.php
+
+		-
+			message: '#^Relation ''tags'' is not found in App\\Models\\Post model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/BlogController.php
+
+		-
+			message: '#^Relation ''user'' is not found in App\\Models\\Post model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/BlogController.php
