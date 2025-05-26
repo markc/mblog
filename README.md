@@ -2,6 +2,8 @@
 
 [![Laravel Pint](https://github.com/markc/mblog/actions/workflows/pint.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/pint.yml)
 [![Pest Tests](https://github.com/markc/mblog/actions/workflows/pest.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/pest.yml)
+[![Code Coverage](https://github.com/markc/mblog/actions/workflows/coverage.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/coverage.yml)
+[![Static Analysis](https://github.com/markc/mblog/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/static-analysis.yml)
 
 A simple blog platform built with Laravel 12 and Filament 3.3, featuring a fully integrated admin panel, GitHub OAuth authentication, and consistent theming throughout both admin and public pages.
 
@@ -219,21 +221,23 @@ When Filament v4 releases with native Tailwind v4 support:
 
 ## 🧪 Testing
 
-The project includes a comprehensive **Pest** test suite with **102 tests** and **217 assertions** covering all major functionality.
+The project includes a comprehensive **Pest** test suite with **110+ tests** and **230+ assertions** covering all major functionality.
 
 ### Test Coverage
-- **Unit Tests (67 tests)**: Models, Controllers, and Core Logic
-- **Feature Tests (35 tests)**: Full HTTP request/response testing
-- **Database Factories**: Complete test data generation
-- **Edge Cases**: 404 handling, validation, published status filtering
+- **Unit Tests (75+ tests)**: Models, Controllers, and Core Logic
+- **Feature Tests (40+ tests)**: Full HTTP request/response testing
+- **Performance Tests**: Load time and query optimization
+- **Advanced Tests**: Edge cases, relationships, SEO features
+- **Database Factories**: Complete test data generation  
+- **Test Helpers**: Utilities for easier test writing
 
 ### Running Tests
 ```bash
-# Run all tests (102 tests)
+# Run all tests (110+ tests)
 php artisan test
 
-# Run with coverage
-php artisan test --coverage
+# Run with coverage (80% minimum)
+php artisan test --coverage --min=80
 
 # Run specific test suites
 php artisan test --testsuite=Unit
@@ -241,6 +245,21 @@ php artisan test --testsuite=Feature
 
 # Run specific test file
 php artisan test tests/Feature/PostTest.php
+
+# Run performance tests
+php artisan test tests/Feature/BlogPerformanceTest.php
+```
+
+### Quality Assurance
+```bash
+# Static analysis with PHPStan
+./vendor/bin/phpstan analyse
+
+# Code formatting
+./vendor/bin/pint
+
+# All quality checks
+./vendor/bin/pint && ./vendor/bin/phpstan analyse && php artisan test
 ```
 
 ### Test Structure
@@ -248,6 +267,7 @@ php artisan test tests/Feature/PostTest.php
 tests/
 ├── Feature/           # HTTP integration tests
 │   ├── BlogHomepageTest.php
+│   ├── BlogPerformanceTest.php
 │   ├── CategoryTest.php
 │   ├── PageTest.php
 │   ├── PostTest.php
@@ -255,8 +275,18 @@ tests/
 ├── Unit/             # Unit tests for models & controllers
 │   ├── Controllers/
 │   └── Models/
+│       ├── PostAdvancedTest.php
+│       └── ...
+├── Helpers/          # Test utilities
+│   └── TestHelpers.php
 └── Pest.php         # Test configuration
 ```
+
+### CI/CD Workflows
+- **Pest Tests**: Automated testing on push/PR
+- **Code Coverage**: Minimum 80% coverage enforcement  
+- **Static Analysis**: PHPStan level 5 analysis
+- **Laravel Pint**: Code formatting verification
 
 ## 🎯 Development Workflow
 
