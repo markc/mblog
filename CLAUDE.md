@@ -92,6 +92,12 @@ php artisan filament:upgrade
 - To match Filament's warm gray colors (instead of Tailwind's blue-tinted grays), override the gray color palette in `resources/css/app.css` using Filament's exact OKLCH values in the `@theme` directive. This ensures the public pages have the same warm, professional color scheme as the Filament admin panel.
 - For Tailwind CSS 4.0 dark mode toggle: Add `@custom-variant dark (&:where(.dark, .dark *));` to CSS, use Alpine.js `x-data` on `<html>` element with `darkMode` variable and `:class="{ 'dark': darkMode }"` binding. Theme switcher button should use `@click="darkMode = !darkMode"` to toggle the shared state. This follows Tailwind CSS 4.0's CSS-first configuration approach.
 - When using Filament v4-beta after June 10 2025, review compatibility changes and test thoroughly before upgrading the project
+- **Test Summary**: 
+  - All tests are implemented using Pest testing framework
+  - Test coverage command available to measure code coverage
+  - Specific test files can be run individually
+  - Tests cover various aspects of the blog system including feature and potentially unit tests
+  - Recommended to maintain high test coverage for critical components like authentication, blog post creation, and admin panel functionality
 
 ## Complete Guide: Matching Filament Colors & Dark Mode Toggle
 

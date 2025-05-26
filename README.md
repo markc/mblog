@@ -2,7 +2,9 @@
 
 [![Laravel Pint](https://github.com/markc/mblog/actions/workflows/pint.yml/badge.svg)](https://github.com/markc/mblog/actions/workflows/pint.yml)
 
-A comprehensive blog platform built with Laravel 12 and Filament 3.3, featuring a fully integrated admin panel, GitHub OAuth authentication, and consistent theming throughout both admin and public pages.
+A simple blog platform built with Laravel 12 and Filament 3.3, featuring a fully integrated admin panel, GitHub OAuth authentication, and consistent theming throughout both admin and public pages.
+
+**Awaiting the release of Filament v4-beta before any further progress**
 
 ## ✨ Features
 
